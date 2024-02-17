@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final - MLOPs:Mod16</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          text-align: center; /* Centraliza el texto en el body */
+      }
+
+      h1, h2 {
+          color: navy;
+      }
+
+      ul {
+          list-style-type: none;
+          padding: 0; /* Remueve el padding por defecto para centralizar correctamente la lista */
+      }
+
+      li {
+          margin: 5px 0;
+      }
+
+      #inputForm {
+          margin-top: 20px;
+      }
+
+      #result {
+          margin-top: 20px;
+          color: green;
+      }
+    </style>
+  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <body>
+    <h1>Proyecto Final</h1>
+    <h2>MLOPS - Mod16</h2>
+    <h2>Integrantes:</h2>
+    <ul>
+        <li>Angela Claudia Caquegua Callahuara</li>
+        <li>Maria Cecilia Vargas Cazon</li>
+        <li>Elio Martin Arias Delgadillo</li>
+        <li>Alvaro Andrés Montesinos Miranda</li>
+    </ul>
+    <!-- Formulario para subir imágenes -->
+    <h2>Formulario de pruebas</h2>
+    <form id="inputForm" style="text-align: center;">
+      <input type="file" name="file">
+          <div>
+            <button type="button" class="btn btn-info" onclick="getResult()" value="submit"
+              style="cursor: pointer;">Submit</button>
+          </div>
+    </form>
+
+    <!-- Sección para mostrar resultado --> 
+    <div class="row" id="result" style="font-size: x-large;">
+      
+    </div>
+
+    <script>
+      function getResult() {
+        var form_data = new FormData($('#inputForm')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/predict',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#result").html(data);       
+            },
+        });
+    }
+    </script>
+  </body>
+</html>
